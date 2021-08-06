@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { employeesData } from './localData';
-import { IgxColumnComponent } from 'igniteui-angular';
+import { IGridKeydownEventArgs, IgxColumnComponent, IgxGridCellComponent, IgxGridComponent } from 'igniteui-angular';
 
 @Component({
   selector: 'app-grid',
@@ -9,7 +9,11 @@ import { IgxColumnComponent } from 'igniteui-angular';
 })
 export class GridComponent implements OnInit {
   public localData: any[];
-  title = 'Grid';
+  public title = 'Grid';
+
+  @ViewChild('grid1', { static: true })
+  public grid: IgxGridComponent;
+
   constructor() { }
 
   ngOnInit() {
@@ -21,4 +25,9 @@ export class GridComponent implements OnInit {
       column.formatter = (date => date.toLocaleDateString());
     }
   }
+
+  public customKeydown(args: IGridKeydownEventArgs) {
+    const target: IgxGridCellComponent = args.target as IgxGridCellComponent;
+    this.grid.onColumnVisibilityChanged.subscribe();
+}
 }
