@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { employeesData } from './localData';
-import { IGridKeydownEventArgs, IgxColumnComponent, IgxGridCellComponent, IgxGridComponent } from 'igniteui-angular';
+import { IGridKeydownEventArgs, IgxColumnComponent, CellType, IgxGridComponent } from 'igniteui-angular';
 
 @Component({
   selector: 'app-grid',
@@ -27,7 +27,7 @@ export class GridComponent implements OnInit {
   }
 
   public customKeydown(args: IGridKeydownEventArgs) {
-    const target: IgxGridCellComponent = args.target as IgxGridCellComponent;
-    this.grid.onColumnVisibilityChanged.subscribe();
+    const target: CellType = args.target as CellType;
+    this.grid.columnVisibilityChanged.subscribe();
 }
 }
